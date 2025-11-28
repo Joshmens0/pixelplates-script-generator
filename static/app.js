@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         generateBtn.disabled = true;
         loadingState.classList.remove('hidden');
         resultSection.classList.add('hidden');
-        
+
         try {
             const response = await fetch('/api/generate', {
                 method: 'POST',
@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const data = await response.json();
-            
+
             // Format JSON
             jsonOutput.textContent = JSON.stringify(data, null, 4);
             resultSection.classList.remove('hidden');
-            
+
             // Scroll to result
             resultSection.scrollIntoView({ behavior: 'smooth' });
 
@@ -61,4 +61,52 @@ document.addEventListener('DOMContentLoaded', () => {
             loadingState.classList.add('hidden');
         }
     }
+
+    // About Modal Logic
+    const aboutBtn = document.getElementById('aboutBtn');
+    const aboutModal = document.getElementById('aboutModal');
+    const closeModal = document.querySelector('.close-modal');
+
+    function toggleModal(show) {
+        if (show) {
+            aboutModal.classList.remove('hidden');
+            // Small delay to allow display:flex to apply before opacity transition
+            requestAnimationFrame(() => {
+                aboutModal.classList.add('visible');
+            });
+        } else {
+            aboutModal.classList.remove('visible');
+            setTimeout(() => {
+                aboutModal.classList.add('hidden');
+            }, 300); // Match transition duration
+        }
+    }
+
+    if (aboutBtn) {
+        aboutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleModal(true);
+        });
+    }
+
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            toggleModal(false);
+        });
+    }
+
+    if (aboutModal) {
+        aboutModal.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                toggleModal(false);
+            }
+        });
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && aboutModal && !aboutModal.classList.contains('hidden')) {
+            toggleModal(false);
+        }
+    });
 });

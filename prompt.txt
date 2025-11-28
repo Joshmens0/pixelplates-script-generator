@@ -19,11 +19,8 @@
       "End with a clear call-to-action or emotionally satisfying close."
     ],
     "character_profile": {
-      "name": "Bata Delon",
       "gender": "Male",
-      "ethnicity": "Black",
       "age": "Mid 20s",
-      "appearance": "Warm brown skin tone, short clean fade haircut, neat casual outfit in earth tones.",
       "facial_expression": "Calm confidence with expressive eyes.",
       "personality": "Authentic, intelligent, slightly humorous, and warm.",
       "voice_style": "Smooth, deep, friendly tone with a modern African accent; clear pronunciation and rhythmic flow.",

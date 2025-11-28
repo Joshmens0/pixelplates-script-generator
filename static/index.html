@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -20,7 +22,8 @@
         <main>
             <div class="input-section">
                 <div class="input-wrapper">
-                    <input type="text" id="promptInput" placeholder="Describe your video idea (e.g., 'Spicy Ramen Recipe')..." autocomplete="off">
+                    <input type="text" id="promptInput"
+                        placeholder="Describe your video idea (e.g., 'Spicy Ramen Recipe')..." autocomplete="off">
                     <button id="generateBtn">
                         <span class="btn-text">Generate Script</span>
                         <i class="fas fa-magic"></i>
@@ -45,9 +48,49 @@
         </main>
 
         <footer>
-            <p>Powered by DeepSeek & Veo 3.1</p>
+            <p>Powered by DeepSeek-Chat | <a href="#" id="aboutBtn">About Developer</a></p>
         </footer>
     </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="profile-header">
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h2>Joshua Okai Mensah</h2>
+                <p class="role">Full Stack Developer/Data Scientist/Ai Content Creator/Engineer</p>
+            </div>
+            <div class="profile-body">
+                <div class="info-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <h3>Education</h3>
+                        <p>University Of Ghana</p>
+                        <p class="sub-text">Bsc. Food Process Engineering</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-briefcase"></i>
+                    <div>
+                        <h3>Portfolio Project</h3>
+                        <p>PixelPlates AI Script Generator</p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/Joshmens0" target="_blank" title="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/joshua-mensah-8723982a7" target="_blank" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="mailto:jomensah017@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="/static/app.js"></script>
 </body>
+
 </html>
