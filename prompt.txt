@@ -1,0 +1,61 @@
+{
+  "task": "Generate a 30-second cinematic flow video script for SceneBuilder.",
+  "instructions": {
+    "goal": "Produce a cohesive 30-second script divided into four seamless 8-second segments that maintain visual, emotional, and narrative continuity.",
+    "structure": {
+      "segment_1": "0–8s",
+      "segment_2": "8–16s",
+      "segment_3": "16–24s",
+      "segment_4": "24–30s"
+    },
+    "requirements": [
+      "Keep one consistent main character throughout all segments.",
+      "Ensure visual and tonal consistency across lighting, pacing, and emotion.",
+      "Each segment must contain:",
+      "1. scene_description — visuals, atmosphere, and transitions.",
+      "2. voiceover — narration (20–25 words per 8s).",
+      "3. on_screen_text — concise, catchy subtitle or caption cue.",
+      "Maintain natural emotional flow and logical storytelling.",
+      "End with a clear call-to-action or emotionally satisfying close."
+    ],
+    "character_profile": {
+      "name": "Bata Delon",
+      "gender": "Male",
+      "ethnicity": "Black",
+      "age": "Mid 20s",
+      "appearance": "Warm brown skin tone, short clean fade haircut, neat casual outfit in earth tones.",
+      "facial_expression": "Calm confidence with expressive eyes.",
+      "personality": "Authentic, intelligent, slightly humorous, and warm.",
+      "voice_style": "Smooth, deep, friendly tone with a modern African accent; clear pronunciation and rhythmic flow.",
+      "emotion_tone": "Relaxed yet inspiring — approachable and confident.",
+      "speech_behavior": "Uses light pauses for emphasis; speaks naturally and warmly."
+    },
+    "output_format": "Return output strictly as valid JSON with four top-level keys: segment_1, segment_2, segment_3, segment_4."
+  },
+  "example_output": {
+    "segment_1": {
+      "time": "0–8s",
+      "scene_description": "Bata stands beside a wooden table with fresh ingredients under warm kitchen lighting.",
+      "voiceover": "They say good food brings people together — and today, I’ll show you exactly how.",
+      "on_screen_text": "Cooking Brings Us Together 🍲"
+    },
+    "segment_2": {
+      "time": "8–16s",
+      "scene_description": "Camera follows Bata slicing onions with rhythm; gentle jazz hums in the background.",
+      "voiceover": "Every slice tells a story — precision, patience, and passion on a plate.",
+      "on_screen_text": "Every Slice Has a Story"
+    },
+    "segment_3": {
+      "time": "16–24s",
+      "scene_description": "Bata mixes ingredients, smiling as he speaks directly to the camera.",
+      "voiceover": "Cooking isn’t about perfection — it’s about moments that feed the soul.",
+      "on_screen_text": "Create Moments, Not Perfection"
+    },
+    "segment_4": {
+      "time": "24–30s",
+      "scene_description": "Close-up of the final dish; Bata looks at the camera, proud and relaxed.",
+      "voiceover": "Join me next time — let’s keep creating magic, one meal at a time.",
+      "on_screen_text": "Join the Flavor Journey ✨"
+    }
+  }
+}

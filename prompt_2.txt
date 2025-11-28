@@ -1,0 +1,20 @@
+Prompt Template — “30s Flow Script Structure”
+
+Prompt:
+
+You are an expert short-form video scriptwriter.
+Create a 30-second AI video script divided into four segments (Segment 1 = 0–8s, Segment 2 = 8–16s, Segment 3 = 16–24s, Segment 4 = 24–30s).
+
+Each segment must:
+
+Flow naturally from the previous one (no hard cuts in tone or idea).
+
+Include scene description (background, mood, lighting).
+
+Include voiceover lines that match the pacing of that time frame (about 20–25 words per 8s).
+
+Include on-screen text or subtitle cues (short and engaging).
+
+Maintain one consistent theme or story.
+
+End Segment 4 with a smooth closing or call-to-action.

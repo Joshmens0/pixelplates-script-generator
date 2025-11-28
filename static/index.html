@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelPlates AI | Script Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-utensils"></i> PixelPlates AI
+            </div>
+            <p class="subtitle">Create Cinematic Food Content in Seconds</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="input-wrapper">
+                    <input type="text" id="promptInput" placeholder="Describe your video idea (e.g., 'Spicy Ramen Recipe')..." autocomplete="off">
+                    <button id="generateBtn">
+                        <span class="btn-text">Generate Script</span>
+                        <i class="fas fa-magic"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="loadingState" class="hidden">
+                <div class="loader"></div>
+                <p>Chef AI is cooking up your script...</p>
+            </div>
+
+            <div id="resultSection" class="hidden">
+                <div class="result-header">
+                    <h2><i class="fas fa-file-alt"></i> Generated Script</h2>
+                    <button id="copyBtn" title="Copy JSON"><i class="far fa-copy"></i></button>
+                </div>
+                <div class="json-container">
+                    <pre><code id="jsonOutput"></code></pre>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by DeepSeek & Veo 3.1</p>
+        </footer>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
