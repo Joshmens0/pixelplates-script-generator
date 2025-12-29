@@ -39,22 +39,59 @@ class ScriptGenerator:
         else:
             self.console.print(f"[blue]Directory found at {self.script_dir}[/blue]")
 
-    def generate_json_script(self, user_prompt: str) -> dict:
+    @staticmethod
+    def get_available_prompts(directory: Path = Path.cwd()) -> list[str]:
+        """Scan for text files that look like prompts."""
+        return [f.name for f in directory.glob("*.txt") if "prompt" in f.name]
+
+    def _load_prompt(self, path: Path) -> str:
+        """Load prompt content from a file."""
+        if not path.exists():
+             raise FileNotFoundError(f"System prompt file not found: {path}")
+        with open(path, mode='r', encoding='utf-8') as f:
+            return f.read()
+
+    def generate_json_script(self, user_prompt: str, system_prompt_path: Path = None, reference_content: str = None) -> dict:
         self.console.print(f"\n[bold yellow]Generating JSON script for:[/bold yellow] {user_prompt}")
+        if reference_content:
+            self.console.print(f"[dim]With reference content ({len(reference_content)} chars)[/dim]")
         
+        # Determine which prompt to use
+        current_prompt = self.system_prompt
+        if system_prompt_path:
+            self.console.print(f"[dim]Using custom prompt: {system_prompt_path.name}[/dim]")
+            current_prompt = self._load_prompt(system_prompt_path)
+            
+        # Construct the user message
+        prompt_content = f"""You are an elite Chef 
+                            and AI trainer helping to create social media content,
+                            practical chef food videos for a YouTube channel called PixelPlates.
+                            Generate a detailed educational JSON script based on the following request:
+                            
+                            REQUEST: {user_prompt}
+                            """
+                            
+        if reference_content:
+            prompt_content += f"""
+                            
+                            [REFERENCE MATERIAL START]
+                            {reference_content}
+                            [REFERENCE MATERIAL END]
+                            
+                            IMPORTANT: Use the above REFERENCE MATERIAL as the primary source for the recipe steps, ingredients, and style.
+                            """
+                            
+        prompt_content += """
+                            The script will later be used to produce an AI-generated
+                            YouTube Short video using Veo 3.1."""
+
         try:
             with self.console.status("[bold green]Thinking...[/bold green]", spinner="dots"):
                 response = self.client.chat.completions.create(
                     model=self.model,
                     messages=[
-                        {"role": "system", "content": self.system_prompt},
-                        {"role": "user", "content": f"""You are an elite Chef 
-                            and AI trainer helping to create social media content,
-                            practical chef food videos for a YouTube channel called PixelPlates.
-                            Generate a detailed educational JSON script based on the {user_prompt} 
-                            I provide. 
-                            The script will later be used to produce an AI-generated
-                            YouTube Short video using Veo 3.1."""}
+                        {"role": "system", "content": current_prompt},
+                        {"role": "user", "content": prompt_content}
                     ],
                     temperature=1.5,
                     response_format={'type': 'json_object'}
@@ -99,14 +136,21 @@ class ScriptGenerator:
             self.console.print(f"[bold red]API Request failed: {e}[/bold red]")
             raise
 
-    def generate_text_script(self, user_prompt: str) -> str:
+    def generate_text_script(self, user_prompt: str, system_prompt_path: Path = None) -> str:
         self.console.print(f"\n[bold yellow]Generating text script for:[/bold yellow] {user_prompt}")
+        
+        # Determine which prompt to use
+        current_prompt = self.system_prompt
+        if system_prompt_path:
+            self.console.print(f"[dim]Using custom prompt: {system_prompt_path.name}[/dim]")
+            current_prompt = self._load_prompt(system_prompt_path)
+            
         try:
             with self.console.status("[bold green]Thinking...[/bold green]", spinner="dots"):
                 response = self.client.chat.completions.create(
                     model=self.model,
                     messages=[
-                        {"role": "system", "content": self.system_prompt},
+                        {"role": "system", "content": current_prompt},
                         {"role": "user", "content": f"""You are an elite Chef 
                             and AI trainer helping to create social media content,
                             practical chef food videos for a YouTube channel called PixelPlates.

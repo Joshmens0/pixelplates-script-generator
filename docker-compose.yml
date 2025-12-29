@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "5436:5436"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://pixeluser:pixelpass@db:5432/pixelplates
+      # DEEPSEEK_API_KEY should be passed from host env or .env file
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+    volumes:
+      - ./scripts:/app/scripts
+      - ./static:/app/static
+      # Mount prompt files so they can be edited on host
+      - ./prompt.txt:/app/prompt.txt
+      - ./prompt_asmr.txt:/app/prompt_asmr.txt
+      - ./prompt_no_host.txt:/app/prompt_no_host.txt
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=pixeluser
+      - POSTGRES_PASSWORD=pixelpass
+      - POSTGRES_DB=pixelplates
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

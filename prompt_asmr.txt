@@ -1,0 +1,59 @@
+{
+  "task": "Generate a 30-second ASMR food script for SceneBuilder.",
+  "instructions": {
+    "goal": "Produce a 30-second sensory-focused script divided into four segments. Priority is on audio triggers and texture visuals.",
+    "structure": {
+      "segment_1": "0–8s",
+      "segment_2": "8–16s",
+      "segment_3": "16–24s",
+      "segment_4": "24–30s"
+    },
+    "requirements": [
+      "Focus on Sensory details: Crisp sounds, detailed textures, slow movements.",
+      "No loud music. Focus on the raw sound of cooking.",
+      "Each segment must contain:",
+      "1. scene_description — visual action that corresponds to a specific sound.",
+      "2. audio_cues — description of the specific sound (e.g., 'Loud crunch', 'Fizzy pour').",
+      "3. voiceover — OPTIONAL. If used, must be soft-spoken/whispered. If not, use 'N/A'.",
+      "4. on_screen_text — minimal, defining the sound (e.g., 'Listen...', 'Sizzle').",
+      "Maintain a calming, satisfying flow."
+    ],
+    "asmr_profile": {
+      "visual_trigger": "Zoomed-in textures, sticky, crunchy, fizzy, or steaming visuals.",
+      "audio_trigger": "Amplified natural sounds (binaural audio style).",
+      "pacing": "Deliberate and slow.",
+      "mood": "Tingly, relaxing, satisfying."
+    },
+    "output_format": "Return output strictly as valid JSON with four top-level keys: segment_1, segment_2, segment_3, segment_4."
+  },
+  "example_output": {
+    "segment_1": {
+      "time": "0–8s",
+      "scene_description": "Close up: A carbonated drink is poured over ice cubes in a glass. Fizzy bubbles pop near the lens.",
+      "audio_cues": "Crisp cracking of a can opening, followed by intense fizzing and ice cracking.",
+      "voiceover": "shhh... listen close.",
+      "on_screen_text": "Ice Cold 🧊"
+    },
+    "segment_2": {
+      "time": "8–16s",
+      "scene_description": "Macro shot: A knife slowly cuts through layers of crispy fried chicken skin.",
+      "audio_cues": "Loud, dry crunching sound; distinct separation of crispy skin.",
+      "voiceover": "N/A",
+      "on_screen_text": "CRUNCH."
+    },
+    "segment_3": {
+      "time": "16–24s",
+      "scene_description": "A spoon cracks the caramelized sugar surface of a crème brûlée.",
+      "audio_cues": "Sharp 'crack' of the sugar shell breaking.",
+      "voiceover": "(Whispered) The perfect break.",
+      "on_screen_text": "Satisfying Snap"
+    },
+    "segment_4": {
+      "time": "24–30s",
+      "scene_description": "Sauce being poured slowly over a dessert, coating it smoothly.",
+      "audio_cues": "Thick, wet glooping sound; soft velvety liquid noise.",
+      "voiceover": "N/A",
+      "on_screen_text": "Smooth..."
+    }
+  }
+}

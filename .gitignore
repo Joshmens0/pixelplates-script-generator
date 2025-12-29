@@ -2,5 +2,6 @@ __pycache__/
 *.pyc
 *.env
 .vscode/
-scripts/
+scripts/*
+!scripts/.keep
 Old/

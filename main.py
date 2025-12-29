@@ -122,8 +122,33 @@ class ScriptGenerator:
 
 def main():
     console = Console()
-    prompt_location = Path.cwd() / "prompt.txt"
+    # Get available prompts
+    prompts = ScriptGenerator.get_available_prompts()
+    if not prompts:
+        console.print("[bold red]No prompt files found![/bold red]")
+        return
+
+    console.print("\n[bold cyan]Available Video Styles:[/bold cyan]")
+    for idx, p in enumerate(prompts, 1):
+        console.print(f"{idx}. {p}")
     
+    selected_prompt = prompts[0] # Default
+    while True:
+        try:
+            choice = console.input(f"\n[bold green]Select style (1-{len(prompts)}) [default=1]:[/bold green] ").strip()
+            if not choice:
+                break
+            idx = int(choice)
+            if 1 <= idx <= len(prompts):
+                selected_prompt = prompts[idx-1]
+                break
+            console.print("[red]Invalid selection[/red]")
+        except ValueError:
+            console.print("[red]Please enter a number[/red]")
+
+    prompt_location = Path.cwd() / selected_prompt
+    console.print(f"[dim]Selected: {selected_prompt}[/dim]")
+
     try:
         # Initialize generator once
         generator = ScriptGenerator(

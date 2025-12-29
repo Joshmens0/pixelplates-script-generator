@@ -1,0 +1,55 @@
+{
+  "task": "Generate a 30-second cinematic food B-roll script for SceneBuilder.",
+  "instructions": {
+    "goal": "Produce a cohesive 30-second script divided into four seamless 8-second segments that focus purely on the culinary process and visual beauty of the food.",
+    "structure": {
+      "segment_1": "0–8s",
+      "segment_2": "8–16s",
+      "segment_3": "16–24s",
+      "segment_4": "24–30s"
+    },
+    "requirements": [
+      "NO visible faces. Focus on hands, tools, and ingredients only.",
+      "Ensure visual continuity: lighting, color grading, and cooking stage.",
+      "Each segment must contain:",
+      "1. scene_description — detailed camera angles (macro, overhead, slow-mo), steam, textures.",
+      "2. voiceover — evocative narration describing the flavor/feeling (20–25 words per 8s).",
+      "3. on_screen_text — elegant, minimal typography.",
+      "Maintain a 'Food Porn' aesthetic: high contrast, steam, glistening textures.",
+      "End with a final plating shot."
+    ],
+    "visual_style": {
+      "camera_work": "Macro lens, slow-motion (60fps), rack focus, smooth pans.",
+      "lighting": "Dark moody background with harsh rim light on the food (Chiaroscuro style).",
+      "color_palette": "Rich, saturated colors, warm tones for cooked food, vibrant greens for garnish.",
+      "atmosphere": "Sophisticated, appetizing, and immersive."
+    },
+    "output_format": "Return output strictly as valid JSON with four top-level keys: segment_1, segment_2, segment_3, segment_4."
+  },
+  "example_output": {
+    "segment_1": {
+      "time": "0–8s",
+      "scene_description": "Extreme close-up (macro) of a knife slicing through a crispy baguette; crumbs fly in slow motion.",
+      "voiceover": "The sound of perfection isn't silence. It's the crunch that promises something unforgettable.",
+      "on_screen_text": "Crunch Perfection 🥖"
+    },
+    "segment_2": {
+      "time": "8–16s",
+      "scene_description": "Overhead shot: Hands drizzle thick, golden honey over cheese; light catches the liquid stream.",
+      "voiceover": "Nature’s gold meeting savory craft. A balance of textures that dances on the palate.",
+      "on_screen_text": "Sweet Meets Savory"
+    },
+    "segment_3": {
+      "time": "16–24s",
+      "scene_description": "Low angle: A hot cast iron skillet searing a steak; smoke rises gracefully into a shaft of light.",
+      "voiceover": "Heat, time, and patience. The alchemy of turning raw ingredients into a masterpiece.",
+      "on_screen_text": "The Sizzle is Real 🔥"
+    },
+    "segment_4": {
+      "time": "24–30s",
+      "scene_description": "Final plating shot: Fresh herbs are placed with tweezers. The dish sits perfectly under a spotlight.",
+      "voiceover": "This isn’t just food. It’s art you can taste. PixelPlates—savor the detail.",
+      "on_screen_text": "Art You Can Taste"
+    }
+  }
+}

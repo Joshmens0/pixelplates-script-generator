@@ -1,96 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PixelPlates AI | Script Generator</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <script src="/static/auth.js"></script>
+  <script>
+      // Redirect if not logged in
+      if (!getToken()) window.location.href = '/static/login.html';
+  </script>
 
-<body>
-    <div class="container">
-        <header>
+  <body>
+    <!-- History Sidebar -->
+    <div class="history-sidebar" id="historySidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-history"></i> Recent Scripts</h3>
+            <button id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="history-list" id="historyList">
+            <!-- History items will be injected here -->
+            <div class="loading-history">Loading...</div>
+        </div>
+    </div>
+    
+    <div class="app-container">
+      <header>
+        <div class="header-left">
+            <button id="historyToggle" class="icon-btn" title="View History">
+                <i class="fas fa-history"></i>
+            </button>
             <div class="logo">
-                <i class="fas fa-utensils"></i> PixelPlates AI
+                <i class="fas fa-utensils"></i>
+                <h1>PixelPlates <span class="highlight">AI</span></h1>
             </div>
-            <p class="subtitle">Create Cinematic Food Content in Seconds</p>
-        </header>
+        </div>
+        <div class="logout-container">
+             <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+      </header>
 
-        <main>
-            <div class="input-section">
+      <main>
+        <div class="input-section">
                 <div class="input-wrapper">
-                    <input type="text" id="promptInput"
-                        placeholder="Describe your video idea (e.g., 'Spicy Ramen Recipe')..." autocomplete="off">
+                    <div class="style-selector">
+                        <select id="promptSelect">
+                            <option value="">Loading styles...</option>
+                        </select>
+                    </div>
+                    <textarea id="promptInput" rows="1"
+                        placeholder="Describe your video idea (e.g., 'Spicy Ramen Recipe')..."></textarea>
                     <button id="generateBtn">
                         <span class="btn-text">Generate Script</span>
                         <i class="fas fa-magic"></i>
                     </button>
                 </div>
-            </div>
 
-            <div id="loadingState" class="hidden">
-                <div class="loader"></div>
-                <p>Chef AI is cooking up your script...</p>
-            </div>
+                <div class="upload-section">
+                    <label for="fileInput" class="upload-zone" id="dropZone">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span id="fileName">Upload reference content (PDF, TXT, MD)</span>
+                        <input type="file" id="fileInput" accept=".pdf,.txt,.md" hidden>
+                    </label>
+                </div>
+        </div>
 
-            <div id="resultSection" class="hidden">
+        <div id="loadingState" class="hidden">
+          <div class="loader"></div>
+          <p>Chef AI is cooking up your script...</p>
+        </div>
+
+        <div id="resultSection" class="hidden">
                 <div class="result-header">
                     <h2><i class="fas fa-file-alt"></i> Generated Script</h2>
-                    <button id="copyBtn" title="Copy JSON"><i class="far fa-copy"></i></button>
+                    <div class="view-toggle">
+                        <button class="toggle-btn active" data-view="visual">
+                            <i class="fas fa-th-list"></i> Visual
+                        </button>
+                        <button class="toggle-btn" data-view="code">
+                            <i class="fas fa-code"></i> Code
+                        </button>
+                    </div>
                 </div>
-                <div class="json-container">
+                
+                <div id="visualOutput" class="visual-container">
+                    <!-- Script cards will be injected here -->
+                </div>
+
+                <div id="codeOutput" class="json-container hidden">
+                    <div class="code-actions">
+                         <button id="copyBtn" title="Copy JSON"><i class="far fa-copy"></i> Copy JSON</button>
+                    </div>
                     <pre><code id="jsonOutput"></code></pre>
                 </div>
-            </div>
-        </main>
+        </div>
+      </main>
 
-        <footer>
-            <p>Powered by DeepSeek-Chat | <a href="#" id="aboutBtn">About Developer</a></p>
-        </footer>
+      <footer>
+        <p>
+          Powered by DeepSeek-Chat |
+          <a href="#" id="aboutBtn">About Developer</a>
+        </p>
+      </footer>
     </div>
 
     <!-- About Modal -->
     <div id="aboutModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="profile-header">
-                <div class="profile-icon">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <h2>Joshua Okai Mensah</h2>
-                <p class="role">Full Stack Developer/Data Scientist/Ai Content Creator/Engineer</p>
-            </div>
-            <div class="profile-body">
-                <div class="info-item">
-                    <i class="fas fa-graduation-cap"></i>
-                    <div>
-                        <h3>Education</h3>
-                        <p>University Of Ghana</p>
-                        <p class="sub-text">Bsc. Food Process Engineering</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-briefcase"></i>
-                    <div>
-                        <h3>Portfolio Project</h3>
-                        <p>PixelPlates AI Script Generator</p>
-                    </div>
-                </div>
-                <div class="social-links">
-                    <a href="https://github.com/Joshmens0" target="_blank" title="GitHub"><i
-                            class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/joshua-mensah-8723982a7" target="_blank" title="LinkedIn"><i
-                            class="fab fa-linkedin"></i></a>
-                    <a href="mailto:jomensah017@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="profile-header">
+          <div class="profile-icon">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <h2>Joshua Okai Mensah</h2>
+          <p class="role">
+            Full Stack Developer/Data Scientist/Ai Content Creator/Engineer
+          </p>
         </div>
+        <div class="profile-body">
+          <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <div>
+              <h3>Education</h3>
+              <p>University Of Ghana</p>
+              <p class="sub-text">Bsc. Food Process Engineering</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-briefcase"></i>
+            <div>
+              <h3>Portfolio Project</h3>
+              <p>PixelPlates AI Script Generator</p>
+            </div>
+          </div>
+          <div class="social-links">
+            <a
+              href="https://github.com/Joshmens0"
+              target="_blank"
+              title="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/joshua-mensah-8723982a7"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a href="mailto:jomensah017@gmail.com" title="Email"
+              ><i class="fas fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script src="/static/app.js"></script>
-</body>
-
+    <script src="/static/app.js?v=2"></script>
+  </body>
 </html>

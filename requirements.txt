@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-dotenv
+openai
+rich
+pypdf
+python-multipart
+python-jose[cryptography]
+passlib[argon2]
+argon2-cffi
+requests
