@@ -76,6 +76,10 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
 async def read_index():
     return FileResponse('static/index.html')
 
+@app.get("/login")
+async def read_login():
+    return FileResponse('static/login.html')
+
 @app.get("/api/history")
 @app.get("/api/history")
 async def get_history(

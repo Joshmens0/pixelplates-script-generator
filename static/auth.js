@@ -98,7 +98,7 @@ async function register(username, password) {
 
 function logout() {
     localStorage.removeItem('pixelplates_token');
-    window.location.href = '/static/login.html';
+    window.location.href = '/login';
 }
 
 function getToken() {
@@ -108,7 +108,7 @@ function getToken() {
 function checkAuth() {
     const token = getToken();
     if (!token) {
-        window.location.href = '/static/login.html';
+        window.location.href = '/login';
     }
     return token;
 }
