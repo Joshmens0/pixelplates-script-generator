@@ -35,6 +35,9 @@ try:
 except Exception as e:
     print(f"Failed to initialize generator: {e}")
     generator = None
+    init_error = str(e)
+else:
+    init_error = None
 
 # Mount static files
 static_dir = Path.cwd() / "static"
@@ -92,7 +95,10 @@ async def generate_script(
     db: Session = Depends(get_db)
 ):
     if not generator:
-        raise HTTPException(status_code=500, detail="Generator not initialized")
+        detail_msg = "Generator not initialized"
+        if init_error:
+            detail_msg += f": {init_error}"
+        raise HTTPException(status_code=500, detail=detail_msg)
     
     try:
         # Handle File Upload (RAG)
