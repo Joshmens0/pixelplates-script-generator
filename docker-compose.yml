@@ -14,6 +14,7 @@ services:
     volumes:
       - ./scripts:/app/scripts
       - ./static:/app/static
+      - ./apiKey.env:/app/apiKey.env
       # Mount prompt files so they can be edited on host
       - ./prompt.txt:/app/prompt.txt
       - ./prompt_asmr.txt:/app/prompt_asmr.txt
